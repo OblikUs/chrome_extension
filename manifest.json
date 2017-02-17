@@ -11,7 +11,8 @@
     "default_title": "Click here!"
   },
   "background": {
-    "scripts": ["background.js"]
+    "scripts": ["background.js"],
+    "persistent": false
   },
   "permissions": [
     "tabs"
