@@ -1,0 +1,10 @@
+#myCustomPopUp1234 {
+  position: fixed;
+  top: 150px;
+  left: 40px;
+  right: 10px;
+  width: 80%;
+  background: black;
+  border-radius: 10px;
+
+}
