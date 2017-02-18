@@ -13,38 +13,53 @@ chrome.runtime.onMessage.addListener(
     if (request.message = "clicked_browser_action") {
 
       let modal = document.createElement('div');
-      modal.classList.add('modal');
+      modal.classList.add('modalll');
       document.body.appendChild(modal);
       modal.style.display = "block";
 
         let modalContent = document.createElement('div');
-        modalContent.classList.add('modal-content');
+        modalContent.classList.add('modal-contenttt');
         modal.appendChild(modalContent);
 
         let modalHeader = document.createElement('div');
-        modalHeader.classList.add('modal-header');
+        modalHeader.classList.add('modal-headerrr');
         modalContent.appendChild(modalHeader);
 
           let close = document.createElement('span');
-          close.classList.add('close');
+          close.classList.add('closeee');
           close.innerHTML = '&times;';
           modalHeader.appendChild(close);
 
-          let h2 = document.createElement('h2');
-          h2.innerHTML = "Modal Header";
+          var span = document.getElementsByClassName("closeee")[0];
+          console.log('span: ', span);
+
+          //click X to exit
+          span.onclick = function() {
+            modal.style.display = "none";
+          }
+
+          let h2 = document.createElement('div');
+          h2.classList.add('myh2')
+          h2.innerHTML = "biazed";
           modalHeader.appendChild(h2);
 
+
         let modalBody = document.createElement('div');
-        modalBody.classList.add('modal-body');
+        modalBody.classList.add('modal-bodyyy');
         modalContent.appendChild(modalBody);
 
-          let p = document.createElement('p');
-          p.innerHTML = 'hello hello hello paragraph';
-          modalBody.appendChild(p);
+          let article1Container = document.createElement('div');
+          article1Container.classList.add('article1Container');
+          modalContent.appendChild(article1Container);
 
         let modalFooter = document.createElement('div');
-        modalFooter.classList.add('modal-footer');
+        modalFooter.classList.add('modal-footerrr');
         modalContent.appendChild(modalFooter);
+
+      //click anywhere on the window to exit
+      window.onclick = function(event) {
+        modal.style.display = "none";
+      }
     }
   }
 );

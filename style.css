@@ -1,14 +1,4 @@
-/*#myCustomPopUp1234 {
-  position: fixed;
-  top: 150px;
-  left: 40px;
-  right: 10px;
-  width: 80%;
-  background: black;
-  border-radius: 10px;
-}*/
-
-.modal {
+.modalll {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -24,11 +14,13 @@
 }
 
 /*Modal Content*/
-.modal-content {
+.modal-contenttt {
     position: fixed;
     bottom: 0;
+    margin-bottom: 20px;
+    margin-left: 35px;
     background-color: #fefefe;
-    width: 100%;
+    width: 95%;
     -webkit-animation-name: slideIn;
     -webkit-animation-duration: 0.4s;
     animation-name: slideIn;
@@ -36,33 +28,46 @@
 }
 
 /* The Close Button */
-.close {
+.closeee {
     color: white;
     float: right;
     font-size: 28px;
     font-weight: bold;
 }
 
-.close:hover,
-.close:focus {
+.closeee:hover,
+.closeee:focus {
     color: #000;
     text-decoration: none;
     cursor: pointer;
 }
 
-.modal-header {
-    padding: 2px 16px;
+.modal-headerrr {
+    padding: 10px 16px;
     background-color: #5cb85c;
     color: white;
 }
 
-.modal-body {padding: 16px 16px;}
+  .myh2 {
+    text-align: center;
+    font-size: 30px;
+  }
 
-.modal-footer {
-    padding: 2px 16px;
+/*.modal-bodyyy {padding: 16px 16px;}*/
+
+  .article1Container{
+    border: black solid 2px;
+    height: 100px;
+    width: 100px;
+  }
+
+.modal-footerrr {
+    margin-top: 5px;
+    padding: 16px 16px;
     background-color: #5cb85c;
     color: white;
 }
+
 
 /* Add Animation */
 @-webkit-keyframes slideIn {
