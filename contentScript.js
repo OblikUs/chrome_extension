@@ -10,8 +10,9 @@ xhr.send(JSON.stringify(url));
 //listens from background.js
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
-    if (request.message = "clicked_browser_action") {
-
+    console.log('request: ', request.message);
+    if (request.message === "clicked_browser_action") {
+      console.log('hit');
       let html = document.getElementsByTagName('html')[0];
 
       let popupContainer = document.createElement('div');
@@ -22,6 +23,7 @@ chrome.runtime.onMessage.addListener(
       modal.classList.add('querty');
       popupContainer.appendChild(modal);
       modal.style.display = "block";
+
 
         let modalContent = document.createElement('div');
         modalContent.classList.add('modal-contenttt');
@@ -39,7 +41,7 @@ chrome.runtime.onMessage.addListener(
           //click X to exit
           var span = document.getElementsByClassName("closeee")[0];
           span.onclick = function() {
-            modal.style.display = "none";
+            popupContainer.parentNode.removeChild(popupContainer);
           }
 
           let h2 = document.createElement('div');
@@ -72,9 +74,13 @@ chrome.runtime.onMessage.addListener(
              event.target.className !== 'modal-footerrr' &&
              event.target.className !== 'article1Container'
           ){
-          modal.style.display = "none";
+          popupContainer.parentNode.removeChild(popupContainer);
         }
       }
+    }
+    else {
+      let popupContainer = document.getElementsByClassName('popupContainer')[0];
+      popupContainer.parentNode.removeChild(popupContainer);
     }
   }
 );
