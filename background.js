@@ -8,3 +8,8 @@ chrome.browserAction.onClicked.addListener(function(tab) {
     chrome.tabs.sendMessage(activeTab.id, {"message": "clicked_browser_action"});
   });
 });
+
+
+chrome.runtime.onMessage.addListener(function(request, sender) {
+    chrome.tabs.update(sender.tab.id, {url: request.redirect});
+});

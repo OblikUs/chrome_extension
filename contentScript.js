@@ -12,9 +12,15 @@ chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
     if (request.message = "clicked_browser_action") {
 
+      let html = document.getElementsByTagName('html')[0];
+
+      let popupContainer = document.createElement('div');
+      popupContainer.classList.add('popupContainer');
+      html.appendChild(popupContainer);
+
       let modal = document.createElement('div');
-      modal.classList.add('modalll');
-      document.body.appendChild(modal);
+      modal.classList.add('querty');
+      popupContainer.appendChild(modal);
       modal.style.display = "block";
 
         let modalContent = document.createElement('div');
@@ -30,10 +36,8 @@ chrome.runtime.onMessage.addListener(
           close.innerHTML = '&times;';
           modalHeader.appendChild(close);
 
-          var span = document.getElementsByClassName("closeee")[0];
-          console.log('span: ', span);
-
           //click X to exit
+          var span = document.getElementsByClassName("closeee")[0];
           span.onclick = function() {
             modal.style.display = "none";
           }
@@ -51,14 +55,25 @@ chrome.runtime.onMessage.addListener(
           let article1Container = document.createElement('div');
           article1Container.classList.add('article1Container');
           modalContent.appendChild(article1Container);
+          article1Container.onclick = function() {
+            chrome.runtime.sendMessage({redirect: "http://google.com"});
+          }
 
         let modalFooter = document.createElement('div');
         modalFooter.classList.add('modal-footerrr');
         modalContent.appendChild(modalFooter);
 
-      //click anywhere on the window to exit
+      // click anywhere on the window to exit
       window.onclick = function(event) {
-        modal.style.display = "none";
+        console.log('event: ', event);
+        console.log('event.target: ', event.target.className);
+        if ( event.target.className !== 'modal-contenttt' &&
+             event.target.className !== 'myh2' &&
+             event.target.className !== 'modal-footerrr' &&
+             event.target.className !== 'article1Container'
+          ){
+          modal.style.display = "none";
+        }
       }
     }
   }

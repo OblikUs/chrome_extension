@@ -1,5 +1,5 @@
-.modalll {
-    display: none; /* Hidden by default */
+.querty {
+    display: block; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
     left: 0;
@@ -59,6 +59,13 @@
     border: black solid 2px;
     height: 100px;
     width: 100px;
+  }
+
+  .article1Container:hover,
+  .article1Container:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
   }
 
 .modal-footerrr {
