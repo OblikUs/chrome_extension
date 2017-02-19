@@ -1,6 +1,4 @@
-
-
-//send URL to server
+//sends URL to server
 let url = {url: document.URL}
 let xhr = new XMLHttpRequest();
 xhr.open('POST', 'http://localhost:8080/', true);
@@ -10,71 +8,80 @@ xhr.send(JSON.stringify(url));
 //listens from background.js
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
-    console.log('request: ', request.message);
-    if (request.message === "clicked_browser_action") {
-      console.log('hit');
+    if (request.message === "first_click") {
+      //html tag
       let html = document.getElementsByTagName('html')[0];
 
+      //div popupContainer
       let popupContainer = document.createElement('div');
       popupContainer.classList.add('popupContainer');
       html.appendChild(popupContainer);
 
-      let modal = document.createElement('div');
-      modal.classList.add('querty');
-      popupContainer.appendChild(modal);
-      modal.style.display = "block";
+        //div modal child of popupContainer
+        let modal = document.createElement('div');
+        modal.classList.add('querty');
+        popupContainer.appendChild(modal);
+        modal.style.display = "block";
 
+          //div modalContent child of modal
+          let modalContent = document.createElement('div');
+          modalContent.classList.add('modal-contenttt');
+          modal.appendChild(modalContent);
 
-        let modalContent = document.createElement('div');
-        modalContent.classList.add('modal-contenttt');
-        modal.appendChild(modalContent);
+            //div modalHeader child of modalContent
+            let modalHeader = document.createElement('div');
+            modalHeader.classList.add('modal-headerrr');
+            modalContent.appendChild(modalHeader);
 
-        let modalHeader = document.createElement('div');
-        modalHeader.classList.add('modal-headerrr');
-        modalContent.appendChild(modalHeader);
+            //span close child of modalHeader
+            let close = document.createElement('span');
+            close.classList.add('closeee');
+            close.innerHTML = '&times;';
+            modalHeader.appendChild(close);
 
-          let close = document.createElement('span');
-          close.classList.add('closeee');
-          close.innerHTML = '&times;';
-          modalHeader.appendChild(close);
+            //Onclick X to remove entire node
+            var span = document.getElementsByClassName("closeee")[0];
+            span.onclick = function() {
+              popupContainer.parentNode.removeChild(popupContainer);
+                //Sends to background.js
+                chrome.runtime.sendMessage({"message": false});
+            }
 
-          //click X to exit
-          var span = document.getElementsByClassName("closeee")[0];
-          span.onclick = function() {
-            popupContainer.parentNode.removeChild(popupContainer);
-          }
+            //div title child of modalHeader
+            let title = document.createElement('div');
+            title.classList.add('titleee')
+            title.innerHTML = "biazed";
+            modalHeader.appendChild(title);
 
-          let h2 = document.createElement('div');
-          h2.classList.add('myh2')
-          h2.innerHTML = "biazed";
-          modalHeader.appendChild(h2);
+          //div modalBody child of modalContent
+          let modalBody = document.createElement('div');
+          modalBody.classList.add('modal-bodyyy');
+          modalContent.appendChild(modalBody);
 
+            //div article1Container child of modalContent
+            let article1Container = document.createElement('div');
+            article1Container.classList.add('article1Container');
+            modalContent.appendChild(article1Container);
 
-        let modalBody = document.createElement('div');
-        modalBody.classList.add('modal-bodyyy');
-        modalContent.appendChild(modalBody);
+            //onclick redirects to link
+            article1Container.onclick = function() {
+              chrome.runtime.sendMessage({redirect: "http://google.com"});
+            }
 
-          let article1Container = document.createElement('div');
-          article1Container.classList.add('article1Container');
-          modalContent.appendChild(article1Container);
-          article1Container.onclick = function() {
-            chrome.runtime.sendMessage({redirect: "http://google.com"});
-          }
-
-        let modalFooter = document.createElement('div');
-        modalFooter.classList.add('modal-footerrr');
-        modalContent.appendChild(modalFooter);
+          //div modalFooter child of modalContent
+          let modalFooter = document.createElement('div');
+          modalFooter.classList.add('modal-footerrr');
+          modalContent.appendChild(modalFooter);
 
       // click anywhere on the window to exit
       window.onclick = function(event) {
-        console.log('event: ', event);
-        console.log('event.target: ', event.target.className);
         if ( event.target.className !== 'modal-contenttt' &&
-             event.target.className !== 'myh2' &&
+             event.target.className !== 'titleee' &&
              event.target.className !== 'modal-footerrr' &&
              event.target.className !== 'article1Container'
           ){
           popupContainer.parentNode.removeChild(popupContainer);
+          chrome.runtime.sendMessage({"message": false});
         }
       }
     }
@@ -86,12 +93,6 @@ chrome.runtime.onMessage.addListener(
 );
 
 
-
-// let iframe = document.createElement('iframe');
-// iframe.src = chrome.extension.getURL('newsPop.html');
-// iframe.id = 'myCustomPopUp1234';
-// iframe.style.height = "150px";
-// document.body.appendChild(iframe);
 
 
 
