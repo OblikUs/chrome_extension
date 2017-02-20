@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
 
-  "name": "Getting started example",
+  "name": "Obliq.us",
   "description": "This extension shows a Google Image search result for the current page",
   "version": "1.0",
 
@@ -12,9 +12,7 @@
     "scripts": ["background.js"]
   },
   "permissions": [
-  "tabs",
-  "http://*/*",
-  "https://*/*"
+  "tabs"
   ],
   "content_scripts": [
     {
@@ -24,7 +22,6 @@
     }
   ],
   "web_accessible_resources": [
-    "newsPop.html",
     "style.css"
   ]
 }

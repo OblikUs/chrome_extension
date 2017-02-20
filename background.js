@@ -15,6 +15,7 @@ function updateState(){
 }
 
 function disableBrowserAction(){
+  console.log('disabled');
   // Send a message to the active tab
   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
     var activeTab = tabs[0];
@@ -24,6 +25,7 @@ function disableBrowserAction(){
 }
 
 function enableBrowserAction(){
+  console.log('enabled');
   // Send a message to the active tab
   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
     var activeTab = tabs[0];

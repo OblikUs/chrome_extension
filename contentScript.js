@@ -1,7 +1,7 @@
 //sends URL to server
 let url = {url: document.URL}
 let xhr = new XMLHttpRequest();
-xhr.open('POST', 'http://localhost:8080/', true);
+xhr.open('POST', 'https://localhost:8080/', true);
 xhr.setRequestHeader("content-type", "application/json; charset=UTF-8");
 xhr.send(JSON.stringify(url));
 
@@ -20,8 +20,8 @@ chrome.runtime.onMessage.addListener(
         //div modal child of popupContainer
         let modal = document.createElement('div');
         modal.classList.add('querty');
-        popupContainer.appendChild(modal);
         modal.style.display = "block";
+        popupContainer.appendChild(modal);
 
           //div modalContent child of modal
           let modalContent = document.createElement('div');
@@ -50,7 +50,7 @@ chrome.runtime.onMessage.addListener(
             //div title child of modalHeader
             let title = document.createElement('div');
             title.classList.add('titleee')
-            title.innerHTML = "biazed";
+            title.innerHTML = "obliq";
             modalHeader.appendChild(title);
 
           //div modalBody child of modalContent

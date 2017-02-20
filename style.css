@@ -1,7 +1,6 @@
 .querty {
-    display: hidden; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 2147483647; /* Sit on top */
+    z-index: 1/*2147483647*/; /* Sit on top */
     left: 0;
     top: 0;
     overflow: auto; /* Enable scroll if needed */
