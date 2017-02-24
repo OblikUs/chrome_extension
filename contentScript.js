@@ -5,6 +5,15 @@ xhr.open('POST', 'https://localhost:8080/', true);
 xhr.setRequestHeader("content-type", "application/json; charset=UTF-8");
 xhr.send(JSON.stringify(url));
 
+
+xhr.addEventListenter("load", getData);
+xhr.open('GET', 'https://localhost:8080/', true);
+oreq.send()
+
+function getData() {
+  console.log('this.responseText: ', this.responseText);
+}
+
 //listens from background.js
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
