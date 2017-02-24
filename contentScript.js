@@ -1,75 +1,96 @@
-
-
-let url = {
-  url: document.URL
-}
-
+//sends URL to server
+let url = {url: document.URL}
 let xhr = new XMLHttpRequest();
-xhr.open('POST', 'http://localhost:3000/', true);
+xhr.open('POST', 'https://localhost:8080/', true);
 xhr.setRequestHeader("content-type", "application/json; charset=UTF-8");
 xhr.send(JSON.stringify(url));
 
+//listens from background.js
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+    if (request.message === "first_click") {
+      //html tag
+      let html = document.getElementsByTagName('html')[0];
 
-console.log('url: ', url);
+      //div popupContainer
+      let popupContainer = document.createElement('div');
+      popupContainer.classList.add('popupContainer');
+      html.appendChild(popupContainer);
 
+        //div modal child of popupContainer
+        let modal = document.createElement('div');
+        modal.classList.add('querty');
+        modal.style.display = "block";
+        popupContainer.appendChild(modal);
 
-// //Request to get data
-//   var oReq = new XMLHttpRequest();
-//   oReq.addEventListener("readystatechange", getData);
-//   oReq.open("GET", "https://www.reddit.com/r/aww/.json");
-//   oReq.send();
+          //div modalContent child of modal
+          let modalContent = document.createElement('div');
+          modalContent.classList.add('modal-contenttt');
+          modal.appendChild(modalContent);
 
-//   //data from aww
-//   function getData(){
-//   console.log(this.readyState);
-//   var aww = JSON.parse(this.readyState);
-//   console.log('aww: ', aww.data);
-//   }
+            //div modalHeader child of modalContent
+            let modalHeader = document.createElement('div');
+            modalHeader.classList.add('modal-headerrr');
+            modalContent.appendChild(modalHeader);
 
-// //bbc
-// if (document.domain === "www.bbc.com") {
-//   chrome.runtime.sendMessage(
-//     document.querySelector('meta[property="og:description"]').content
-//   );
+            //span close child of modalHeader
+            let close = document.createElement('span');
+            close.classList.add('closeee');
+            close.innerHTML = '&times;';
+            modalHeader.appendChild(close);
 
+            //Onclick X to remove entire node
+            var span = document.getElementsByClassName("closeee")[0];
+            span.onclick = function() {
+              popupContainer.parentNode.removeChild(popupContainer);
+                //Sends to background.js
+                chrome.runtime.sendMessage({"message": false});
+            }
 
-//   // just place a div at top right
-//   var body = document.getElementsByClassName('body-content');
-//   console.log('body: ', body);
-//   var div = document.createElement('div');
-//   div.style.fontSize = '2em';
-//   div.textContent = 'Injected!';
-//   div.style.backgroundColor = 'green';
-//   div.style.width = '100px';
-//   div.style.height = '100px';
-//   body[0].appendChild(div);
+            //div title child of modalHeader
+            let title = document.createElement('div');
+            title.classList.add('titleee')
+            title.innerHTML = "obliq";
+            modalHeader.appendChild(title);
 
-//   alert('inserted');
+          //div modalBody child of modalContent
+          let modalBody = document.createElement('div');
+          modalBody.classList.add('modal-bodyyy');
+          modalContent.appendChild(modalBody);
 
-// }
+            //div article1Container child of modalContent
+            let article1Container = document.createElement('div');
+            article1Container.classList.add('article1Container');
+            modalContent.appendChild(article1Container);
 
-// //reuters
-// if (document.domain === "www.reuters.com") {
-//   chrome.runtime.sendMessage(
-//     document.querySelector('meta[property="og:description"]').content
-//   );
+            //onclick redirects to link
+            article1Container.onclick = function() {
+              chrome.runtime.sendMessage({redirect: "http://google.com"});
+            }
 
+          //div modalFooter child of modalContent
+          let modalFooter = document.createElement('div');
+          modalFooter.classList.add('modal-footerrr');
+          modalContent.appendChild(modalFooter);
 
-//   // just place a div at top right
-//   var body = document.getElementById('article-text');
-//   console.log('body: ', body);
-//   var div = document.createElement('div');
-//   div.style.fontSize = '2em';
-//   div.textContent = 'Injected!';
-//   div.style.backgroundColor = 'green';
-//   // div.style.width = 100px;
-//   // div.style.height = 100px;
-//   body.appendChild(div);
-
-//   alert('inserted self... giggity');
-
-
-// }
+      // click anywhere on the window to exit
+      window.onclick = function(event) {
+        if ( event.target.className !== 'modal-contenttt' &&
+             event.target.className !== 'titleee' &&
+             event.target.className !== 'modal-footerrr' &&
+             event.target.className !== 'article1Container'
+          ){
+          popupContainer.parentNode.removeChild(popupContainer);
+          chrome.runtime.sendMessage({"message": false});
+        }
+      }
+    }
+    else {
+      let popupContainer = document.getElementsByClassName('popupContainer')[0];
+      popupContainer.parentNode.removeChild(popupContainer);
+    }
+  }
+);
 
 
 
