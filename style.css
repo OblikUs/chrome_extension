@@ -1,6 +1,6 @@
 .querty {
     position: fixed; /* Stay in place */
-    z-index: 1/*2147483647*/; /* Sit on top */
+    z-index: 999/*2147483647*/; /* Sit on top */
     left: 0;
     top: 0;
     overflow: auto; /* Enable scroll if needed */
@@ -14,12 +14,13 @@
 
 /*Modal Content*/
 .modal-contenttt {
+    margin-right: 50px;
     position: fixed;
     bottom: 0;
-    margin-bottom: 20px;
-    margin-left: 35px;
+    /*margin-bottom: 20px;*/
+    /*margin-left: 35px;*/
     background-color: #fefefe;
-    width: 95%;
+    width: 100%;
     -webkit-animation-name: slideIn;
     -webkit-animation-duration: 0.4s;
     animation-name: slideIn;
@@ -43,36 +44,78 @@
 
 .modal-headerrr {
     padding: 10px 16px;
-    background-color: #5cb85c;
+    background-color: #3acec2;
     color: white;
 }
 
   .titleee{
     text-align: center;
     font-size: 30px;
+    font-family: Arial;
   }
 
-/*.modal-bodyyy {padding: 16px 16px;}*/
+.modal-bodyyy {
+  margin: 20px;
+  display: flex;
+  }
 
-  .article1Container{
-    border: black solid 2px;
-    height: 100px;
-    width: 100px;
+  .articleSource1 {
+    text-align: center;
+    flex:1;
+  }
+
+    .article1Container{
+      display: block;
+      margin:auto;
+      border: red solid 2px;
+      height: 200px;
+      width: 250px;
+
+    }
+
+  .articleSource2 {
+    text-align: center;
+    flex:1;
+  }
+
+
+    .article2Container{
+      display: block;
+      margin:auto;
+      border: purple solid 2px;
+      height: 200px;
+      width: 250px;
+
+    }
+
+  .articleSource3 {
+    text-align: center;
+    flex:1;
+  }
+
+  .article3Container{
+    display: block;
+    margin:auto;
+    border: blue solid 2px;
+    height: 200px;
+    width: 250px;
+
+
   }
 
   .article1Container:hover,
   .article1Container:focus {
-    color: #000;
+    background-color: red;
     text-decoration: none;
     cursor: pointer;
   }
 
-.modal-footerrr {
+/*.modal-footerrr {
     margin-top: 5px;
     padding: 16px 16px;
     background-color: #5cb85c;
     color: white;
-}
+}*/
 
 
 /* Add Animation */
