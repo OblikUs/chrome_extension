@@ -2,8 +2,14 @@
 let url = {url: document.URL}
 let xhr = new XMLHttpRequest();
 xhr.open('POST', 'https://localhost:8080/', true);
+xhr.addEventListener("load", getData);
 xhr.setRequestHeader("content-type", "application/json; charset=UTF-8");
 xhr.send(JSON.stringify(url));
+let articles;
+function getData() {
+  let article = JSON.parse(this.responseText);
+  articles = article;
+}
 
 
 
@@ -11,15 +17,7 @@ xhr.send(JSON.stringify(url));
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
     if (request.message === "first_click") {
-      //html tag
-      xhr.addEventListener("load", getData);
-      xhr.open('GET', 'https://localhost:8080/api/popup', true);
-      xhr.send()
-
-      function getData() {
-        let article = JSON.parse(this.responseText);
-        console.log('article: ', article.results[0].data[1].row[0].title);
-      }
+      console.log(articles);
 
       let html = document.getElementsByTagName('html')[0];
 
