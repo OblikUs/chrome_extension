@@ -5,6 +5,22 @@ xhr.open('POST', 'https://localhost:8080/', true);
 xhr.setRequestHeader("content-type", "application/json; charset=UTF-8");
 xhr.send(JSON.stringify(url));
 
+function closeAnimation() {
+
+  let popupContainer = document.getElementsByClassName('popupContainer')[0];
+
+  let fadeOut = document.getElementsByClassName('querty')[0];
+  fadeOut.id ='fadeOut';
+
+  let slideOut = document.getElementsByClassName('modal-contenttt')[0];
+  slideOut.id ='slideOut';
+
+  setTimeout(function(){
+    popupContainer.parentNode.removeChild(popupContainer);
+    chrome.runtime.sendMessage({"message": false});
+
+  }, 400);
+}
 
 
 //listens from background.js
@@ -31,7 +47,7 @@ chrome.runtime.onMessage.addListener(
         //div modal child of popupContainer
         let modal = document.createElement('div');
         modal.classList.add('querty');
-        modal.style.display = "block";
+        // modal.style.display = "block";
         popupContainer.appendChild(modal);
 
           //div modalContent child of modal
@@ -53,9 +69,7 @@ chrome.runtime.onMessage.addListener(
             //Onclick X to remove entire node
             var span = document.getElementsByClassName("closeee")[0];
             span.onclick = function() {
-              popupContainer.parentNode.removeChild(popupContainer);
-                //Sends to background.js
-                chrome.runtime.sendMessage({"message": false});
+              closeAnimation();
             }
 
             //div title child of modalHeader
@@ -108,29 +122,25 @@ chrome.runtime.onMessage.addListener(
               chrome.runtime.sendMessage({redirect: "http://google.com"});
             }
 
-          // //div modalFooter child of modalContent
-          // let modalFooter = document.createElement('div');
-          // modalFooter.classList.add('modal-footerrr');
-          // modalContent.appendChild(modalFooter);
 
       // click anywhere on the window to exit
       window.onclick = function(event) {
+        console.log('event.target.className: ', event.target.className);
         if ( event.target.className !== 'modal-contenttt' &&
              event.target.className !== 'titleee' &&
              event.target.className !== 'modal-footerrr' &&
              event.target.className !== 'article1Container'
           ){
-          popupContainer.parentNode.removeChild(popupContainer);
-          chrome.runtime.sendMessage({"message": false});
+          closeAnimation();
         }
       }
     }
     else {
-      let popupContainer = document.getElementsByClassName('popupContainer')[0];
-      popupContainer.parentNode.removeChild(popupContainer);
+      closeAnimation();
     }
   }
 );
+
 
 
 
