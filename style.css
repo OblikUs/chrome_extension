@@ -77,27 +77,27 @@
   display: flex;
   }
 
-  .articleSource1 {
+  .liberal {
     text-align: center;
     flex:1;
   }
 
-    .articleContainer1{
+    .liberalContainer{
       display: block;
       margin:auto;
-      border: red solid 2px;
+      border: blue solid 2px;
       height: 200px;
       width: 250px;
 
     }
 
-  .articleSource2 {
+  .center {
     text-align: center;
     flex:1;
   }
 
 
-    .articleContainer2{
+    .centerContainer{
       display: block;
       margin:auto;
       border: purple solid 2px;
@@ -106,28 +106,41 @@
 
     }
 
-  .articleSource3 {
+  .conservative {
     text-align: center;
     flex:1;
   }
 
-  .articleContainer3{
+  .conservativeContainer {
     display: block;
     margin:auto;
-    border: blue solid 2px;
+    border: red solid 2px;
     height: 200px;
     width: 250px;
 
 
   }
 
-  .article1Container:hover,
-  .article1Container:focus {
-    background-color: red;
+  .liberalContainer:hover,
+  .liberalContainer:focus {
+    background-color: blue;
     text-decoration: none;
     cursor: pointer;
   }
 
+  .centerContainer:hover,
+  .centerContainer:focus {
+    background-color: purple;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .redContainer:hover,
+  .redContainer:focus {
+    background-color: red;
+    text-decoration: none;
+    cursor: pointer;
+  }
 
 /* Add Animation */
 @-webkit-keyframes slideIn {

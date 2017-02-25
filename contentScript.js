@@ -27,12 +27,17 @@ function closeAnimation() {
   }, 400);
 }
 
+function linkRedirect(element){
+  element.onclick = function() {
+    chrome.runtime.sendMessage({redirect: articles[i][0].url});
+    chrome.runtime.sendMessage({"message": false});
+  }
+}
+
 //listens from background.js
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
     if (request.message === "first_click") {
-      console.log(articles);
-
 
       let html = document.getElementsByTagName('html')[0];
 
@@ -80,44 +85,88 @@ chrome.runtime.onMessage.addListener(
           modalBody.classList.add('oblik-body');
           modalContent.appendChild(modalBody);
 
-            //div article source1
-            let articleSource1 = document.createElement('div');
-            articleSource1.classList.add('articleSource1');
-            articleSource1.innerHTML = "FOX NEWS";
-            modalBody.appendChild(articleSource1);
+          //Data
+          for (let i = 0; i < articles.length; i++){
+            console.log('articles[i][0]: ', articles[i][0]);
 
-              //div article1Container child of modalContent
-              let article1Container = document.createElement('div');
-              article1Container.classList.add('articleContainer1');
-              articleSource1.appendChild(article1Container);
+            //liberal
+            if (articles[i][0].view === "center-left") {
+
+            //div article source1
+            let liberal = document.createElement('div');
+            liberal.classList.add('liberal');
+            liberal.innerHTML = articles[i][0].view;
+            modalBody.appendChild(liberal);
+
+              //div liberalContainer child of modalContent
+              let liberalContainer = document.createElement('div');
+              liberalContainer.classList.add('liberalContainer');
+              liberalContainer.onclick = function() {
+                chrome.runtime.sendMessage({redirect: articles[i][0].url});
+                chrome.runtime.sendMessage({"message": false});
+              }
+              liberal.appendChild(liberalContainer);
+
+              //title
+              let titleLiberal = document.createElement('div');
+              titleLiberal.classList.add('titleLiberal');
+              titleLiberal.innerHTML = articles[i][0].title;
+              liberalContainer.appendChild(titleLiberal);
+
+            //center
+            } else if (articles[i][0].view === "center") {
 
             //div article source 2
-            let articleSource2 = document.createElement('div');
-            articleSource2.classList.add('articleSource2');
-            articleSource2.innerHTML = "REUTERS";
-            modalBody.appendChild(articleSource2);
+            let center = document.createElement('div');
+            center.classList.add('center');
+            center.innerHTML = articles[i][0].view;
+            modalBody.appendChild(center);
 
-              //div article2Container child of modalContent
-              let article2Container = document.createElement('div');
-              article2Container.classList.add('articleContainer2');
-              articleSource2.appendChild(article2Container);
+              //div centerContainer child of modalContent
+              let centerContainer = document.createElement('div');
+              centerContainer.classList.add('centerContainer');
+              centerContainer.onclick = function() {
+                chrome.runtime.sendMessage({redirect: articles[i][0].url});
+                chrome.runtime.sendMessage({"message": false});
+              }
+              center.appendChild(centerContainer);
+
+              //title
+              let titleCenter = document.createElement('div');
+              titleCenter.classList.add('titleCenter');
+              titleCenter.innerHTML = articles[i][0].title;
+              centerContainer.appendChild(titleCenter);
+
+            //conservative
+            } else if (articles[i][0].view === "center-right"){
 
             //div article source 3
-            let articleSource3 = document.createElement('div');
-            articleSource3.classList.add('articleSource3');
-            articleSource3.innerHTML = "HUFFINGTING POST";
-            modalBody.appendChild(articleSource3);
+            let conservative = document.createElement('div');
+            conservative.classList.add('conservative');
+            conservative.innerHTML = articles[i][0].view;
+            modalBody.appendChild(conservative);
 
-              //div article3Container child of modalContent
-              let article3Container = document.createElement('div');
-              article3Container.classList.add('articleContainer3');
-              articleSource3.appendChild(article3Container);
+              //div conservativeContainer child of modalContent
+              let conservativeContainer = document.createElement('div');
+              conservativeContainer.classList.add('conservativeContainer');
+              conservativeContainer.onclick = function() {
+                chrome.runtime.sendMessage({redirect: articles[i][0].url});
+                chrome.runtime.sendMessage({"message": false});
+              }
+              conservative.appendChild(conservativeContainer);
 
-
-            //onclick redirects to link
-            article1Container.onclick = function() {
-              chrome.runtime.sendMessage({redirect: "http://google.com"});
+              //title
+              let titleConservative = document.createElement('div');
+              titleConservative.classList.add('titleConservative');
+              titleConservative.innerHTML = articles[i][0].title;
+              conservativeContainer.appendChild(titleConservative);
             }
+          }
+
+            // //onclick redirects to link
+            // liberalContainer.onclick = function() {
+            //   chrome.runtime.sendMessage({redirect: "http://google.com"});
+            // }
 
 
       // click anywhere on the window to exit
@@ -126,10 +175,10 @@ chrome.runtime.onMessage.addListener(
         if ( event.target.className !== 'oblik-content' &&
              event.target.className !== 'oblik-header' &&
              event.target.className !== 'oblik-title' &&
-             event.target.className !== 'article1Container' &&
-             event.target.className !== 'articleSource1' &&
-             event.target.className !== 'articleSource2' &&
-             event.target.className !== 'articleSource3'
+             event.target.className !== 'liberalContainer' &&
+             event.target.className !== 'liberal' &&
+             event.target.className !== 'center' &&
+             event.target.className !== 'conservative'
           ){
           closeAnimation();
         }
