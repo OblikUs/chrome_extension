@@ -1,23 +1,38 @@
 //sends URL to server
 let url = {url: document.URL}
-let xhr = new XMLHttpRequest();
-xhr.open('POST', 'https://localhost:8080/', true);
-xhr.addEventListener("load", getData);
-xhr.setRequestHeader("content-type", "application/json; charset=UTF-8");
-xhr.send(JSON.stringify(url));
+let getArticles = new XMLHttpRequest();
+getArticles.open('POST', 'https://localhost:8080/', true);
+getArticles.addEventListener("load", getData);
+getArticles.setRequestHeader("content-type", "application/json; charset=UTF-8");
+getArticles.send(JSON.stringify(url));
 let articles;
 function getData() {
   let article = JSON.parse(this.responseText);
   articles = article;
 }
 
+function closeAnimation() {
 
+  let popupContainer = document.getElementsByClassName('popupContainer')[0];
+
+  let fadeOut = document.getElementsByClassName('oblik-modal')[0];
+  fadeOut.id ='fadeOut';
+
+  let slideOut = document.getElementsByClassName('oblik-content')[0];
+  slideOut.id ='slideOut';
+
+  setTimeout(function(){
+    popupContainer.parentNode.removeChild(popupContainer);
+    chrome.runtime.sendMessage({"message": false});
+  }, 400);
+}
 
 //listens from background.js
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
     if (request.message === "first_click") {
       console.log(articles);
+
 
       let html = document.getElementsByTagName('html')[0];
 
@@ -28,43 +43,41 @@ chrome.runtime.onMessage.addListener(
 
         //div modal child of popupContainer
         let modal = document.createElement('div');
-        modal.classList.add('querty');
-        modal.style.display = "block";
+        modal.classList.add('oblik-modal');
+        // modal.style.display = "block";
         popupContainer.appendChild(modal);
 
           //div modalContent child of modal
           let modalContent = document.createElement('div');
-          modalContent.classList.add('modal-contenttt');
+          modalContent.classList.add('oblik-content');
           modal.appendChild(modalContent);
 
             //div modalHeader child of modalContent
             let modalHeader = document.createElement('div');
-            modalHeader.classList.add('modal-headerrr');
+            modalHeader.classList.add('oblik-header');
             modalContent.appendChild(modalHeader);
 
             //span close child of modalHeader
             let close = document.createElement('span');
-            close.classList.add('closeee');
+            close.classList.add('oblik-close');
             close.innerHTML = '&times;';
             modalHeader.appendChild(close);
 
             //Onclick X to remove entire node
-            var span = document.getElementsByClassName("closeee")[0];
+            var span = document.getElementsByClassName("oblik-close")[0];
             span.onclick = function() {
-              popupContainer.parentNode.removeChild(popupContainer);
-                //Sends to background.js
-                chrome.runtime.sendMessage({"message": false});
+              closeAnimation();
             }
 
             //div title child of modalHeader
             let title = document.createElement('div');
-            title.classList.add('titleee')
+            title.classList.add('oblik-title')
             title.innerHTML = "oblik";
             modalHeader.appendChild(title);
 
           //div modalBody child of modalContent
           let modalBody = document.createElement('div');
-          modalBody.classList.add('modal-bodyyy');
+          modalBody.classList.add('oblik-body');
           modalContent.appendChild(modalBody);
 
             //div article source1
@@ -75,7 +88,7 @@ chrome.runtime.onMessage.addListener(
 
               //div article1Container child of modalContent
               let article1Container = document.createElement('div');
-              article1Container.classList.add('article1Container');
+              article1Container.classList.add('articleContainer1');
               articleSource1.appendChild(article1Container);
 
             //div article source 2
@@ -86,7 +99,7 @@ chrome.runtime.onMessage.addListener(
 
               //div article2Container child of modalContent
               let article2Container = document.createElement('div');
-              article2Container.classList.add('article2Container');
+              article2Container.classList.add('articleContainer2');
               articleSource2.appendChild(article2Container);
 
             //div article source 3
@@ -97,7 +110,7 @@ chrome.runtime.onMessage.addListener(
 
               //div article3Container child of modalContent
               let article3Container = document.createElement('div');
-              article3Container.classList.add('article3Container');
+              article3Container.classList.add('articleContainer3');
               articleSource3.appendChild(article3Container);
 
 
@@ -106,29 +119,28 @@ chrome.runtime.onMessage.addListener(
               chrome.runtime.sendMessage({redirect: "http://google.com"});
             }
 
-          // //div modalFooter child of modalContent
-          // let modalFooter = document.createElement('div');
-          // modalFooter.classList.add('modal-footerrr');
-          // modalContent.appendChild(modalFooter);
 
       // click anywhere on the window to exit
       window.onclick = function(event) {
-        if ( event.target.className !== 'modal-contenttt' &&
-             event.target.className !== 'titleee' &&
-             event.target.className !== 'modal-footerrr' &&
-             event.target.className !== 'article1Container'
+        console.log('event.target.className: ', event.target.className);
+        if ( event.target.className !== 'oblik-content' &&
+             event.target.className !== 'oblik-header' &&
+             event.target.className !== 'oblik-title' &&
+             event.target.className !== 'article1Container' &&
+             event.target.className !== 'articleSource1' &&
+             event.target.className !== 'articleSource2' &&
+             event.target.className !== 'articleSource3'
           ){
-          popupContainer.parentNode.removeChild(popupContainer);
-          chrome.runtime.sendMessage({"message": false});
+          closeAnimation();
         }
       }
     }
     else {
-      let popupContainer = document.getElementsByClassName('popupContainer')[0];
-      popupContainer.parentNode.removeChild(popupContainer);
+      closeAnimation();
     }
   }
 );
+
 
 
 
