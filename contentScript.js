@@ -25,6 +25,8 @@ if (part[2] === "www.cnn.com") {
 
   let leftPopup= document.getElementsByClassName('sibling sibling--previous');
   // leftPopup[0].style.zIndex = 0;
+
+
 };
 
 if (part[2] === "www.reuters.com") {
