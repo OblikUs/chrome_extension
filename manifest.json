@@ -18,7 +18,7 @@
     {
       "matches": ["http://*/*", "https://*/*"],
       "css": ["style.css"],
-      "js": ["contentScript.js"]
+      "js": ["jquery.min.js", "contentScript.js"]
     }
   ],
   "web_accessible_resources": [

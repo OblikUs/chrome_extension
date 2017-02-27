@@ -1,3 +1,6 @@
+$("body").append('Testicles');
+
+
 //sends URL to server
 let url = {url: document.URL}
 let getArticles = new XMLHttpRequest();
@@ -187,17 +190,12 @@ chrome.runtime.onMessage.addListener(
             }
           }
 
-            // //onclick redirects to link
-            // liberalContainer.onclick = function() {
-            //   chrome.runtime.sendMessage({redirect: "http://google.com"});
-            // }
-
-
       // click anywhere on the window to exit
       window.onclick = function(event) {
         console.log('event.target.className: ', event.target.className);
         if ( event.target.className !== 'oblik-content' &&
              event.target.className !== 'oblik-header' &&
+             event.target.className !== 'oblik-title' &&
              event.target.className !== 'oblik-title' &&
              event.target.className !== 'liberalContainer' &&
              event.target.className !== 'conservativeContainer' &&
