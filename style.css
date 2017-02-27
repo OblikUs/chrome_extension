@@ -194,7 +194,7 @@
 @media (max-width: 1210px) {
 
   .liberal, .center, .conservative {
-    flex:1;
+    flex:1 1 50px;
   }
 
 }

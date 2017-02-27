@@ -21,7 +21,7 @@ if (part[2] === "www.cnn.com") {
   console.log('videoPlayer: ', videoPlayer);
   videoPlayer[0].style.zIndex = 0;
   let rightPopup = document.getElementsByClassName('sibling sibling--next');
-  // rightPopup[0].style.zIndex = 0;
+  rightPopup[0].style.zIndex = 0;
 
   let leftPopup= document.getElementsByClassName('sibling sibling--previous');
   // leftPopup[0].style.zIndex = 0;
