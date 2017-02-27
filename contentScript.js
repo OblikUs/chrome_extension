@@ -11,6 +11,30 @@ function getData() {
   articles = article;
 }
 
+let newUrl = url.url;
+let part = newUrl.split("/");
+if (part[2] === "www.cnn.com") {
+  let videoPlayer = document.getElementsByClassName('js-media__video media__video');
+  console.log('videoPlayer: ', videoPlayer);
+  videoPlayer[0].style.zIndex = 0;
+  let rightPopup = document.getElementsByClassName('sibling sibling--next');
+  // rightPopup[0].style.zIndex = 0;
+
+  let leftPopup= document.getElementsByClassName('sibling sibling--previous');
+  // leftPopup[0].style.zIndex = 0;
+};
+
+if (part[2] === "www.reuters.com") {
+  let ad = document.getElementsByClassName('section article-sticky')[0];
+  ad.style.zIndex = 0;
+};
+
+if (part[2] === "bigstory.ap.org") {
+  let video = document.querySelector('.ndn_floatContainer, .ndn_floatContainer_disabled');
+  console.log('video: ', video);
+  // video[0].style.zIndex = 0;
+};
+
 function closeAnimation() {
 
   let popupContainer = document.getElementsByClassName('popupContainer')[0];
@@ -176,6 +200,8 @@ chrome.runtime.onMessage.addListener(
              event.target.className !== 'oblik-header' &&
              event.target.className !== 'oblik-title' &&
              event.target.className !== 'liberalContainer' &&
+             event.target.className !== 'conservativeContainer' &&
+             event.target.className !== 'centerContainer' &&
              event.target.className !== 'liberal' &&
              event.target.className !== 'center' &&
              event.target.className !== 'conservative'

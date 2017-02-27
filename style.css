@@ -1,9 +1,9 @@
 .oblik-modal {
     position: fixed; /* Stay in place */
-    z-index: 999/*2147483647*/; /* Sit on top */
+    z-index: 1/*2147483647*/; /* Sit on top */
     left: 0;
     top: 0;
-    overflow: auto; /* Enable scroll if needed */
+    /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
     -webkit-animation-name: fadeIn; /* Fade in the background */
@@ -30,7 +30,9 @@
     /*margin-bottom: 20px;*/
     /*margin-left: 35px;*/
     background-color: #fefefe;
+    height: 340px;
     width: 100%;
+    overflow-y: scroll;
     -webkit-animation-name: slideIn;
     -webkit-animation-duration: 0.4s;
     animation-name: slideIn;
@@ -51,6 +53,7 @@
     float: right;
     font-size: 28px;
     font-weight: bold;
+    margin-right: 85px;
 }
 
 .oblik-close:hover,
@@ -61,6 +64,8 @@
 }
 
 .oblik-header {
+    position: fixed;
+    width: 103%;
     padding: 10px 16px;
     background-color: #3acec2;
     color: white;
@@ -73,13 +78,15 @@
   }
 
 .oblik-body {
-  margin: 20px;
+  margin: 70px 50px 25px 50px;
   display: flex;
+  flex-flow: row wrap;
   }
 
   .liberal {
     text-align: center;
-    flex:1;
+    flex:1 1 300px;
+    margin-bottom: 60px;
   }
 
     .liberalContainer{
@@ -88,12 +95,13 @@
       border: blue solid 2px;
       height: 200px;
       width: 250px;
-
+      margin-top: 10px;
     }
 
   .center {
     text-align: center;
-    flex:1;
+    flex:1 1 300px;
+    margin-bottom: 60px;
   }
 
 
@@ -103,12 +111,14 @@
       border: purple solid 2px;
       height: 200px;
       width: 250px;
+      margin-top: 10px;
 
     }
 
   .conservative {
     text-align: center;
-    flex:1;
+    flex:1 1 300px;
+    margin-bottom: 60px;
   }
 
   .conservativeContainer {
@@ -117,7 +127,7 @@
     border: red solid 2px;
     height: 200px;
     width: 250px;
-
+    margin-top: 10px;
 
   }
 
@@ -135,8 +145,8 @@
     cursor: pointer;
   }
 
-  .redContainer:hover,
-  .redContainer:focus {
+  .conservativeContainer:hover,
+  .conservativeContainer:focus {
     background-color: red;
     text-decoration: none;
     cursor: pointer;
