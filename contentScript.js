@@ -122,6 +122,7 @@ chrome.runtime.onMessage.addListener(
             //div article source1
             let liberal = document.createElement('div');
             liberal.classList.add('liberal');
+            liberal.id = `id${i}`;
             liberal.innerHTML = articles[i][0].view;
             modalBody.appendChild(liberal);
 
@@ -146,6 +147,7 @@ chrome.runtime.onMessage.addListener(
             //div article source 2
             let center = document.createElement('div');
             center.classList.add('center');
+            center.id = `id${i}`;
             center.innerHTML = articles[i][0].view;
             modalBody.appendChild(center);
 
@@ -170,6 +172,7 @@ chrome.runtime.onMessage.addListener(
             //div article source 3
             let conservative = document.createElement('div');
             conservative.classList.add('conservative');
+            conservative.id = `id${i}`;
             conservative.innerHTML = articles[i][0].view;
             modalBody.appendChild(conservative);
 
