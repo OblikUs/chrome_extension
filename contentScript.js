@@ -1,5 +1,3 @@
-$("body").append('Testicles');
-
 
 //sends URL to server
 let url = {url: document.URL}
@@ -13,6 +11,7 @@ function getData() {
   let article = JSON.parse(this.responseText);
   articles = article;
 }
+
 
 let newUrl = url.url;
 let part = newUrl.split("/");

@@ -79,9 +79,8 @@
 
 .oblik-body {
   margin: 70px 0px 25px 0px;
-  display: flex;
-  flex-wrap: wrap;
-  }
+
+}
 
   .liberal {
     text-align: center;
@@ -187,21 +186,32 @@
 }
 
 @keyframes fadeOut {
-    from {opacity: 1}
+   from {opacity: 1}
     to {opacity: 0}
 }
 
-@media (max-width: 1210px) {
+@media (max-width: 800px){
+   .oblik-body {
+    background-color:green;
+    display: flex;
+    flex-flow: row wrap;
+  }
 
   .liberal, .center, .conservative {
-    flex:1 1 50px;
+    flex: 1 1 250px;
   }
 
 }
 
 @media (max-width:2000px) {
 
+  .oblik-body {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+  }
+
   .liberal, .center, .conservative {
-    flex:1 1 370px;
+    width: 30%;
   }
 }
