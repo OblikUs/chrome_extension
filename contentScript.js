@@ -12,36 +12,6 @@ function getData() {
   articles = article;
 }
 
-
-let newUrl = url.url;
-let part = newUrl.split("/");
-// if (part[2] === "www.cnn.com") {
-//   let videoPlayer = document.getElementsByClassName('js-media__video media__video');
-//   console.log('videoPlayer: ', videoPlayer);
-//   videoPlayer[0].style.zIndex = 0;
-//   let rightPopup = document.getElementsByClassName('sibling sibling--next');
-//   rightPopup[0].style.zIndex = 0;
-
-//   let leftPopup= document.getElementsByClassName('sibling sibling--previous');
-//   // leftPopup[0].style.zIndex = 0;
-
-
-// };
-
-if (part[2] === "www.reuters.com") {
-  document.getElementsByClassName('section article-sticky')[0].style.zIndex = 0;
-  let test = document.getElementsByClassName('rc-text-top rc-text-right rc-branding rc-bl-ads-by-revcontent');
-
-  console.log('test: ', test);
-  // .style.zIndex = 0;
-};
-
-if (part[2] === "bigstory.ap.org") {
-  let video = document.querySelector('.ndn_floatContainer, .ndn_floatContainer_disabled');
-  console.log('video: ', video);
-  // video[0].style.zIndex = 0;
-};
-
 function closeAnimation() {
 
   let popupContainer = document.getElementsByClassName('popupContainer')[0];
@@ -151,6 +121,12 @@ chrome.runtime.onMessage.addListener(
               titleLiberal.innerHTML = articles[i][0].title;
               liberalContainer.appendChild(titleLiberal);
 
+              //source
+              let sourceLiberal = document.createElement('div');
+              sourceLiberal.classList.add('article-source');
+              sourceLiberal.innerHTML = articles[i][0].source;
+              liberalContainer.appendChild(sourceLiberal);
+
             //center
             } else if (articles[i][0].view === "center") {
 
@@ -181,6 +157,12 @@ chrome.runtime.onMessage.addListener(
               titleCenter.innerHTML = articles[i][0].title;
               centerContainer.appendChild(titleCenter);
 
+              //source
+              let sourceCenter = document.createElement('div');
+              sourceCenter.classList.add('article-source');
+              sourceCenter.innerHTML = articles[i][0].source;
+              centerContainer.appendChild(sourceCenter);
+
             //conservative
             } else if (articles[i][0].view === "center-right"){
 
@@ -210,6 +192,12 @@ chrome.runtime.onMessage.addListener(
               titleConservative.classList.add('article-title');
               titleConservative.innerHTML = articles[i][0].title;
               conservativeContainer.appendChild(titleConservative);
+
+              //source
+              let sourceConservative = document.createElement('div');
+              sourceConservative.classList.add('article-source');
+              sourceConservative.innerHTML = articles[i][0].source;
+              centerContainer.appendChild(sourceConservative);
             }
           }
 
