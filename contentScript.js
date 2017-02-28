@@ -15,22 +15,25 @@ function getData() {
 
 let newUrl = url.url;
 let part = newUrl.split("/");
-if (part[2] === "www.cnn.com") {
-  let videoPlayer = document.getElementsByClassName('js-media__video media__video');
-  console.log('videoPlayer: ', videoPlayer);
-  videoPlayer[0].style.zIndex = 0;
-  let rightPopup = document.getElementsByClassName('sibling sibling--next');
-  rightPopup[0].style.zIndex = 0;
+// if (part[2] === "www.cnn.com") {
+//   let videoPlayer = document.getElementsByClassName('js-media__video media__video');
+//   console.log('videoPlayer: ', videoPlayer);
+//   videoPlayer[0].style.zIndex = 0;
+//   let rightPopup = document.getElementsByClassName('sibling sibling--next');
+//   rightPopup[0].style.zIndex = 0;
 
-  let leftPopup= document.getElementsByClassName('sibling sibling--previous');
-  // leftPopup[0].style.zIndex = 0;
+//   let leftPopup= document.getElementsByClassName('sibling sibling--previous');
+//   // leftPopup[0].style.zIndex = 0;
 
 
-};
+// };
 
 if (part[2] === "www.reuters.com") {
-  let ad = document.getElementsByClassName('section article-sticky')[0];
-  ad.style.zIndex = 0;
+  document.getElementsByClassName('section article-sticky')[0].style.zIndex = 0;
+  let test = document.getElementsByClassName('rc-text-top rc-text-right rc-branding rc-bl-ads-by-revcontent');
+
+  console.log('test: ', test);
+  // .style.zIndex = 0;
 };
 
 if (part[2] === "bigstory.ap.org") {
@@ -90,6 +93,17 @@ chrome.runtime.onMessage.addListener(
             modalHeader.classList.add('oblik-header');
             modalContent.appendChild(modalHeader);
 
+            //div title child of modalHeader
+            let title = document.createElement('div');
+            title.classList.add('oblik-title')
+            title.innerHTML = "oblik";
+            modalHeader.appendChild(title);
+
+          //div modalBody child of modalContent
+          let modalBody = document.createElement('div');
+          modalBody.classList.add('oblik-body');
+          modalContent.appendChild(modalBody);
+
             //span close child of modalHeader
             let close = document.createElement('span');
             close.classList.add('oblik-close');
@@ -102,16 +116,6 @@ chrome.runtime.onMessage.addListener(
               closeAnimation();
             }
 
-            //div title child of modalHeader
-            let title = document.createElement('div');
-            title.classList.add('oblik-title')
-            title.innerHTML = "oblik";
-            modalHeader.appendChild(title);
-
-          //div modalBody child of modalContent
-          let modalBody = document.createElement('div');
-          modalBody.classList.add('oblik-body');
-          modalContent.appendChild(modalBody);
 
           //Data
           for (let i = 0; i < articles.length; i++){
@@ -136,9 +140,14 @@ chrome.runtime.onMessage.addListener(
               }
               liberal.appendChild(liberalContainer);
 
+              let liberalImg = document.createElement('img');
+              liberalImg.classList.add('oblik-img');
+              liberalImg.src = articles[i][0].image;
+              liberalContainer.appendChild(liberalImg);
+
               //title
               let titleLiberal = document.createElement('div');
-              titleLiberal.classList.add('titleLiberal');
+              titleLiberal.classList.add('article-title');
               titleLiberal.innerHTML = articles[i][0].title;
               liberalContainer.appendChild(titleLiberal);
 
@@ -161,9 +170,14 @@ chrome.runtime.onMessage.addListener(
               }
               center.appendChild(centerContainer);
 
+              let centerIMG = document.createElement('img');
+              centerIMG.classList.add('oblik-img');
+              centerIMG.src = articles[i][0].image;
+              centerContainer.appendChild(centerIMG);
+
               //title
               let titleCenter = document.createElement('div');
-              titleCenter.classList.add('titleCenter');
+              titleCenter.classList.add('article-title');
               titleCenter.innerHTML = articles[i][0].title;
               centerContainer.appendChild(titleCenter);
 
@@ -186,9 +200,14 @@ chrome.runtime.onMessage.addListener(
               }
               conservative.appendChild(conservativeContainer);
 
+              let conservativeImg = document.createElement('img');
+              conservativeImg.classList.add('oblik-img');
+              conservativeImg.src = articles[i][0].image;
+              conservativeContainer.appendChild(conservativeImg);
+
               //title
               let titleConservative = document.createElement('div');
-              titleConservative.classList.add('titleConservative');
+              titleConservative.classList.add('article-title');
               titleConservative.innerHTML = articles[i][0].title;
               conservativeContainer.appendChild(titleConservative);
             }
