@@ -62,11 +62,10 @@
 .oblik-close {
     color: white;
     font-weight: bold;
-    padding-right: 45px;
-    width: 100%;
-    margin-right: -243px;
     font-size: 40px;
-    margin-top: -12px;
+    margin-right: 20px;
+    margin-top: -5px;
+    flex-grow: 0;
 }
 
 .oblik-close:hover,
@@ -78,11 +77,11 @@
 
 
   .oblik-title{
-    text-align: center;
     font-size: 25px;
     font-family: Arial;
-    width: 100%;
-    margin-left: 50px;
+    text-align: center;
+    margin-top: 5px;
+    flex-grow: 3;
   }
 
 .oblik-body {

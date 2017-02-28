@@ -2,7 +2,7 @@
 //sends URL to server
 let url = {url: document.URL}
 let getArticles = new XMLHttpRequest();
-getArticles.open('POST', 'https://localhost:8080/', true);
+getArticles.open('POST', 'https://localhost:8080/related-articles', true);
 getArticles.addEventListener("load", getData);
 getArticles.setRequestHeader("content-type", "application/json; charset=UTF-8");
 getArticles.send(JSON.stringify(url));
@@ -197,7 +197,7 @@ chrome.runtime.onMessage.addListener(
               let sourceConservative = document.createElement('div');
               sourceConservative.classList.add('article-source');
               sourceConservative.innerHTML = articles[i][0].source;
-              centerContainer.appendChild(sourceConservative);
+              conservativeContainer.appendChild(sourceConservative);
             }
           }
 
@@ -206,6 +206,7 @@ chrome.runtime.onMessage.addListener(
         console.log('event.target.className: ', event.target.className);
         if ( event.target.className !== 'oblik-content' &&
              event.target.className !== 'oblik-header' &&
+             event.target.className !== 'oblik-body' &&
              event.target.className !== 'oblik-title' &&
              event.target.className !== 'oblik-title' &&
              event.target.className !== 'liberalContainer' &&
