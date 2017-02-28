@@ -1,7 +1,7 @@
 //sends URL to server
 let url = {url: document.URL}
 let xhr = new XMLHttpRequest();
-xhr.open('POST', 'https://localhost:8080/', true);
+xhr.open('POST', 'https://localhost:8080/related-articles', true);
 xhr.addEventListener("load", getData);
 xhr.setRequestHeader("content-type", "application/json; charset=UTF-8");
 xhr.send(JSON.stringify(url));
