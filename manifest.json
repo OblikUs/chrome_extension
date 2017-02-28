@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
 
-  "name": "Obliq.us",
+  "name": "Oblik.us",
   "description": "This extension shows a Google Image search result for the current page",
   "version": "1.0",
 
@@ -18,7 +18,7 @@
     {
       "matches": ["http://*/*", "https://*/*"],
       "css": ["style.css"],
-      "js": ["contentScript.js"]
+      "js": ["jquery.min.js", "contentScript.js"]
     }
   ],
   "web_accessible_resources": [
