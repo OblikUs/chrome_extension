@@ -209,6 +209,9 @@ chrome.runtime.onMessage.addListener(
              event.target.className !== 'oblik-body' &&
              event.target.className !== 'oblik-title' &&
              event.target.className !== 'oblik-title' &&
+             event.target.className !== 'oblik-img' &&
+             event.target.className !== 'article-title' &&
+             event.target.className !== 'article-source' &&
              event.target.className !== 'liberalContainer' &&
              event.target.className !== 'conservativeContainer' &&
              event.target.className !== 'centerContainer' &&

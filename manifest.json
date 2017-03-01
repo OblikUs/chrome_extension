@@ -22,6 +22,7 @@
     }
   ],
   "web_accessible_resources": [
-    "style.css"
+    "style.css",
+    "fonts/Montserrat-Regular.tff"
   ]
 }
