@@ -6,10 +6,10 @@ getArticles.open('POST', 'https://localhost:8080/related-articles', true);
 getArticles.addEventListener("load", getData);
 getArticles.setRequestHeader("content-type", "application/json; charset=UTF-8");
 getArticles.send(JSON.stringify(url));
+
 let articles;
 function getData() {
-  let article = JSON.parse(this.responseText);
-  articles = article;
+  articles = JSON.parse(this.responseText);
 }
 
 function closeAnimation() {
