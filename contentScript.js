@@ -37,7 +37,6 @@ chrome.runtime.onMessage.addListener(
     if (request.message === "first_click") {
 
       let html = document.getElementsByTagName('html')[0];
-
       //popupContainer
       let popupContainer = document.createElement('div');
       popupContainer.classList.add('popupContainer');
