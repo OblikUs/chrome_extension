@@ -1,4 +1,4 @@
-# Oblik.US Chrome Extentension
+# Oblik.US Chrome Extension
 
 ## Getting Started
 - Fork and clone this repository
