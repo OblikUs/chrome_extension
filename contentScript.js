@@ -9,7 +9,17 @@ getArticles.send(JSON.stringify(url));
 //recieve articles from server
 let articles;
 function getData() {
-  articles = JSON.parse(this.responseText);
+  let articleRes = JSON.parse(this.responseText);
+  let seen = {}
+  articles = articleRes.filter( article => {
+    let url = article[0].url
+    if(seen[url]) {
+      return
+    } else {
+      seen[url] = true;
+      return article
+    }
+  })
 }
 
 //animation to close the popup
