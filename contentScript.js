@@ -8,8 +8,17 @@ getArticles.setRequestHeader("content-type", "application/json; charset=UTF-8");
 getArticles.send(JSON.stringify(url));
 let articles;
 function getData() {
-  let article = JSON.parse(this.responseText);
-  articles = article;
+  let articleRes = JSON.parse(this.responseText);
+  let seen = {}
+  articles = articleRes.filter( article => {
+    let url = article[0].url
+    if(seen[url]) {
+      return
+    } else {
+      seen[url] = true;
+      return article
+    }
+  })
 }
 
 function closeAnimation() {
@@ -89,7 +98,8 @@ chrome.runtime.onMessage.addListener(
 
           //Data
           for (let i = 0; i < articles.length; i++){
-            console.log('articles[i][0]: ', articles[i][0]);
+            console.log(articles);
+            // console.log('articles[i][0]: ', articles[i][0]);
 
             //liberal
             if (articles[i][0].view === "center-left") {
@@ -197,7 +207,7 @@ chrome.runtime.onMessage.addListener(
               let sourceConservative = document.createElement('div');
               sourceConservative.classList.add('article-source');
               sourceConservative.innerHTML = articles[i][0].source;
-              centerContainer.appendChild(sourceConservative);
+              conservativeContainer.appendChild(sourceConservative);
             }
           }
 
@@ -206,8 +216,12 @@ chrome.runtime.onMessage.addListener(
         console.log('event.target.className: ', event.target.className);
         if ( event.target.className !== 'oblik-content' &&
              event.target.className !== 'oblik-header' &&
+             event.target.className !== 'oblik-body' &&
              event.target.className !== 'oblik-title' &&
              event.target.className !== 'oblik-title' &&
+             event.target.className !== 'oblik-img' &&
+             event.target.className !== 'article-title' &&
+             event.target.className !== 'article-source' &&
              event.target.className !== 'liberalContainer' &&
              event.target.className !== 'conservativeContainer' &&
              event.target.className !== 'centerContainer' &&

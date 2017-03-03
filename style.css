@@ -1,6 +1,6 @@
 .oblik-modal {
     position: fixed; /* Stay in place */
-    z-index: 10001/*2147483647*/; /* Sit on top */
+    z-index: 1000000010/*2147483647*/; /* Sit on top */
     left: 0;
     top: 0;
     /* Enable scroll if needed */
@@ -62,11 +62,10 @@
 .oblik-close {
     color: white;
     font-weight: bold;
-    padding-right: 45px;
-    width: 100%;
-    margin-right: -243px;
     font-size: 40px;
-    margin-top: -12px;
+    margin-right: 20px;
+    margin-top: -5px;
+    flex-grow: 0;
 }
 
 .oblik-close:hover,
@@ -78,11 +77,10 @@
 
 
   .oblik-title{
-    text-align: center;
     font-size: 25px;
     font-family: Arial;
-    width: 100%;
-    margin-left: 50px;
+    margin-top: 5px;
+    flex-grow: 3;
   }
 
 .oblik-body {
@@ -91,6 +89,7 @@
 }
 
   .liberal {
+    /*font-family: 'Montserrat-Regular';*/
     text-align: center;
     font-size: 25px;
     margin-bottom: 60px;
@@ -101,7 +100,7 @@
       margin:auto;
       border: blue solid 2px;
       border-radius: 8px;
-      height: 250px;
+      height: 295px;
       width: 300px;
       margin-top: 10px;
     }
@@ -112,13 +111,21 @@
     margin-bottom: 60px;
   }
 
+/*@font-face {
+ font-family: ‘Montserrat-Regular’;
+ font-style: normal;
+ font-weight: 700;
+ src: url(‘chrome-extension://__MSG_@@extension_id__/fonts/Montserrat-Regular.ttf’);
+}*/
+
 
     .centerContainer{
+
       display: block;
       margin:auto;
       border: purple solid 2px;
       border-radius: 8px;
-      height: 250px;
+      height: 295px;
       width: 300px;
       margin-top: 10px;
     }
@@ -134,12 +141,13 @@
     margin:auto;
     border: red solid 2px;
     border-radius: 8px;
-    height: 250px;
+    height: 295px;
     width: 300px;
     margin-top: 10px;
   }
 
 .oblik-img{
+  display: inline-block;
   width: 246px;
   height: 130px;
   object-fit: cover;
@@ -149,11 +157,24 @@
 }
 
 .article-title {
+  font-family:arial;
+  display: inline-block;
   font-size: 15px;
   text-align: left;
   margin-left: 15px;
-  margin-top: 10px;
+  margin-top: 22px;
   margin-right: 10px;
+}
+
+.article-source {
+  display: inline;
+  font-size: 13px;
+  margin-top: 25px;
+  margin-bottom: 5px;
+  text-align: left;
+  margin-left: 12px;
+  font-weight: bold;
+  color: grey;
 }
 
 
@@ -220,19 +241,23 @@
     to {opacity: 0}
 }
 
-@media (max-width: 800px){
+@media (max-width: 915px){
    .oblik-body {
     display: flex;
     flex-flow: row wrap;
   }
 
   .liberal, .center, .conservative {
-    flex: 1 1 250px;
+    flex: 1 1 300px;
   }
 
 }
 
 @media (max-width:2000px) {
+
+  .oblik-title {
+    margin-left: 48.2%;
+  }
 
   .oblik-body {
     display: flex;
