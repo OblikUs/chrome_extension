@@ -1,8 +1,7 @@
-
 //sends URL to server
 let url = {url: document.URL}
 let getArticles = new XMLHttpRequest();
-getArticles.open('POST', 'https://localhost:8080/related-articles', true);
+getArticles.open('POST', 'http://138.197.220.158/related-articles', true);
 getArticles.addEventListener("load", getData);
 getArticles.setRequestHeader("content-type", "application/json; charset=UTF-8");
 getArticles.send(JSON.stringify(url));
@@ -16,12 +15,12 @@ function getData() {
 //animation to close the popup
 function closeAnimation() {
 
-  let popupContainer = document.getElementsByClassName('popupContainer')[0];
+  let popupContainer = document.querySelectorAll('div.popupContainer')[0];
 
-  let fadeOut = document.getElementsByClassName('oblik-modal')[0];
+  let fadeOut = document.querySelectorAll('div.oblik-modal')[0];
   fadeOut.id ='fadeOut';
 
-  let slideOut = document.getElementsByClassName('oblik-content')[0];
+  let slideOut = document.querySelectorAll('div.oblik-content')[0];
   slideOut.id ='slideOut';
 
   setTimeout(function(){
@@ -36,7 +35,8 @@ chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
     if (request.message === "first_click") {
 
-      let html = document.getElementsByTagName('html')[0];
+      let html = document.querySelectorAll('html')[0];
+      console.log('html: ', html);
       //popupContainer
       let popupContainer = document.createElement('div');
       popupContainer.classList.add('popupContainer');
@@ -71,7 +71,7 @@ chrome.runtime.onMessage.addListener(
       modalHeader.appendChild(close);
 
       //Onclick X to remove entire node
-      var span = document.getElementsByClassName("oblik-close")[0];
+      var span = document.querySelectorAll("span.oblik-close")[0];
       span.onclick = function() {
         closeAnimation();
       }
@@ -83,6 +83,19 @@ chrome.runtime.onMessage.addListener(
 
       //Article Data
       for (let i = 0; i < articles.length; i++){
+        console.log('articles[i][1]: ', articles[i][0]);
+
+        //removes if article is the same as page
+        if (articles[i][0].url === url.url) {
+         let index = articles.indexOf(articles[i]);
+         articles.splice(index, 1);
+        }
+
+        // removes if related is less than or equal to 1
+        if (articles[i][1] <= 1 ){
+          let index = articles.indexOf(articles[i][1]);
+          articles.splice(index, 1);
+        }
 
         //liberal
         if (articles[i][0].view === "center-left") {
@@ -126,7 +139,6 @@ chrome.runtime.onMessage.addListener(
           //center
           let center = document.createElement('div');
           center.classList.add('center');
-          center.id = `id${i}`;
           center.innerHTML = articles[i][0].view;
           modalBody.appendChild(center);
 
@@ -163,7 +175,6 @@ chrome.runtime.onMessage.addListener(
           //conservative
           let conservative = document.createElement('div');
           conservative.classList.add('conservative');
-          conservative.id = `id${i}`;
           conservative.innerHTML = articles[i][0].view;
           modalBody.appendChild(conservative);
 
