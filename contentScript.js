@@ -13,11 +13,13 @@ function getData() {
   articles = articleRes.filter( article => {
     let url = article[0].url
     if(seen[url]) {
-      return
+      return;
     } else {
       seen[url] = true;
-      return article
+      return article;
     }
+  }).filter(article => {
+    return article[1] > 2;
   })
 }
 
@@ -97,6 +99,7 @@ chrome.runtime.onMessage.addListener(
 
 
           //Data
+
           for (let i = 0; i < articles.length; i++){
             console.log(articles);
             // console.log('articles[i][0]: ', articles[i][0]);
@@ -159,6 +162,7 @@ chrome.runtime.onMessage.addListener(
               let centerIMG = document.createElement('img');
               centerIMG.classList.add('oblik-img');
               centerIMG.src = articles[i][0].image;
+              centerIMG.alt = "Image not available";
               centerContainer.appendChild(centerIMG);
 
               //title
