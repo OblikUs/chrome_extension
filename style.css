@@ -86,7 +86,8 @@
 }
 
 .viewTitle {
-  font: arial;
+  font-family: helvetica;
+  font-weight: 200;
   font-size: 14px;
   color: gray;
   text-align: right;
