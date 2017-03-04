@@ -7,7 +7,7 @@ getArticles.setRequestHeader("content-type", "application/json; charset=UTF-8");
 getArticles.send(JSON.stringify(url));
 
 //recieve articles from server
-let articles;
+let articles = [];
 function getData() {
   let articleRes = JSON.parse(this.responseText);
   let seen = {}
@@ -92,126 +92,151 @@ chrome.runtime.onMessage.addListener(
       modalBody.classList.add('oblik-body');
       modalContent.appendChild(modalBody);
 
+      if(articles.length !== 0) {
       //Article Data
-      for (let i = 0; i < articles.length; i++){
-        console.log('articles[i][1]: ', articles[i][0]);
+        for (let i = 0; i < articles.length; i++) {
 
-        //removes if article is the same as page
-        if (articles[i][0].url === url.url) {
-         let index = articles.indexOf(articles[i]);
-         articles.splice(index, 1);
-        }
-
-        //liberal
-        if (articles[i][0].view === "center-left") {
-
-          //Liberal
-          let liberal = document.createElement('div');
-          liberal.classList.add('liberal');
-          liberal.innerHTML = articles[i][0].view;
-          modalBody.appendChild(liberal);
-
-          //liberalContainer
-          let liberalContainer = document.createElement('div');
-          liberalContainer.classList.add('liberalContainer');
-          liberalContainer.onclick = function() {
-            chrome.runtime.sendMessage({redirect: articles[i][0].url});
-            chrome.runtime.sendMessage({"message": false});
+          //removes if article is the same as page
+          if (articles[i][0].url === url.url) {
+           let index = articles.indexOf(articles[i]);
+           articles.splice(index, 1);
           }
-          liberal.appendChild(liberalContainer);
 
-          //image
-          let liberalImg = document.createElement('img');
-          liberalImg.classList.add('oblik-img');
-          liberalImg.src = articles[i][0].image;
-          liberalImg.alt = "Image not available";
-          liberalContainer.appendChild(liberalImg);
+          //liberal
+          if (articles[i][0].view === "center-left") {
 
-          //title
-          let titleLiberal = document.createElement('div');
-          titleLiberal.classList.add('article-title');
-          titleLiberal.innerHTML = articles[i][0].title;
-          liberalContainer.appendChild(titleLiberal);
+            //Liberal
+            let liberal = document.createElement('div');
+            liberal.classList.add('liberal');
+            // liberal.innerHTML = articles[i][0].view;
+            modalBody.appendChild(liberal);
 
-          //source
-          let sourceLiberal = document.createElement('div');
-          sourceLiberal.classList.add('article-source');
-          sourceLiberal.innerHTML = articles[i][0].source;
-          liberalContainer.appendChild(sourceLiberal);
+            //liberalContainer
+            let liberalContainer = document.createElement('div');
+            liberalContainer.classList.add('liberalContainer');
+            liberalContainer.onclick = function() {
+              chrome.runtime.sendMessage({redirect: articles[i][0].url});
+              chrome.runtime.sendMessage({"message": false});
+            }
+            liberal.appendChild(liberalContainer);
 
-        //center
-        } else if (articles[i][0].view === "center") {
+            //view title
+            let viewTitle = document.createElement('h4');
+            viewTitle.classList.add('viewTitle');
+            viewTitle.innerHTML = articles[i][0].view
+            liberalContainer.appendChild(viewTitle)
+
+            //image
+            let liberalImg = document.createElement('img');
+            liberalImg.classList.add('oblik-img');
+            liberalImg.src = articles[i][0].image;
+            liberalImg.alt = "Image not available";
+            liberalContainer.appendChild(liberalImg);
+
+            //title
+            let titleLiberal = document.createElement('div');
+            titleLiberal.classList.add('article-title');
+            titleLiberal.innerHTML = articles[i][0].title;
+            liberalContainer.appendChild(titleLiberal);
+
+            //source
+            let sourceLiberal = document.createElement('div');
+            sourceLiberal.classList.add('article-source');
+            sourceLiberal.innerHTML = articles[i][0].source;
+            liberalContainer.appendChild(sourceLiberal);
 
           //center
-          let center = document.createElement('div');
-          center.classList.add('center');
-          center.innerHTML = articles[i][0].view;
-          modalBody.appendChild(center);
+          } else if (articles[i][0].view === "center") {
 
-          //centerContainer
-          let centerContainer = document.createElement('div');
-          centerContainer.classList.add('centerContainer');
-          centerContainer.onclick = function() {
-            chrome.runtime.sendMessage({redirect: articles[i][0].url});
-            chrome.runtime.sendMessage({"message": false});
-          }
-          center.appendChild(centerContainer);
+            //center
+            let center = document.createElement('div');
+            center.classList.add('center');
+            // center.innerHTML = articles[i][0].view;
+            modalBody.appendChild(center);
 
-          //image
-          let centerIMG = document.createElement('img');
-          centerIMG.classList.add('oblik-img');
-          centerIMG.src = articles[i][0].image;
-          centerIMG.alt = "Image not available";
-          centerContainer.appendChild(centerIMG);
+            //centerContainer
+            let centerContainer = document.createElement('div');
+            centerContainer.classList.add('centerContainer');
+            centerContainer.onclick = function() {
+              chrome.runtime.sendMessage({redirect: articles[i][0].url});
+              chrome.runtime.sendMessage({"message": false});
+            }
+            center.appendChild(centerContainer);
 
-          //title
-          let titleCenter = document.createElement('div');
-          titleCenter.classList.add('article-title');
-          titleCenter.innerHTML = articles[i][0].title;
-          centerContainer.appendChild(titleCenter);
+            //view title
+            let viewTitle = document.createElement('h4');
+            viewTitle.classList.add('viewTitle')
+            viewTitle.innerHTML = articles[i][0].view;
+            centerContainer.appendChild(viewTitle)
 
-          //source
-          let sourceCenter = document.createElement('div');
-          sourceCenter.classList.add('article-source');
-          sourceCenter.innerHTML = articles[i][0].source;
-          centerContainer.appendChild(sourceCenter);
+            //image
+            let centerIMG = document.createElement('img');
+            centerIMG.classList.add('oblik-img');
+            centerIMG.src = articles[i][0].image;
+            centerIMG.alt = "Image not available";
+            centerContainer.appendChild(centerIMG);
 
-        //conservative
-        } else if (articles[i][0].view === "center-right"){
+            //title
+            let titleCenter = document.createElement('div');
+            titleCenter.classList.add('article-title');
+            titleCenter.innerHTML = articles[i][0].title;
+            centerContainer.appendChild(titleCenter);
+
+            //source
+            let sourceCenter = document.createElement('div');
+            sourceCenter.classList.add('article-source');
+            sourceCenter.innerHTML = articles[i][0].source;
+            centerContainer.appendChild(sourceCenter);
 
           //conservative
-          let conservative = document.createElement('div');
-          conservative.classList.add('conservative');
-          conservative.innerHTML = articles[i][0].view;
-          modalBody.appendChild(conservative);
+          } else if (articles[i][0].view === "center-right"){
 
-          //conservativeContainer
-          let conservativeContainer = document.createElement('div');
-          conservativeContainer.classList.add('conservativeContainer');
-          conservativeContainer.onclick = function() {
-            chrome.runtime.sendMessage({redirect: articles[i][0].url});
-            chrome.runtime.sendMessage({"message": false});
+            //conservative
+            let conservative = document.createElement('div');
+            conservative.classList.add('conservative');
+            // conservative.innerHTML = articles[i][0].view;
+            modalBody.appendChild(conservative);
+
+            //conservativeContainer
+            let conservativeContainer = document.createElement('div');
+            conservativeContainer.classList.add('conservativeContainer');
+            conservativeContainer.onclick = function() {
+              chrome.runtime.sendMessage({redirect: articles[i][0].url});
+              chrome.runtime.sendMessage({"message": false});
+            }
+            conservative.appendChild(conservativeContainer);
+
+            //view title
+            let viewTitle = document.createElement('h4');
+            viewTitle.classList.add('viewTitle');
+            viewTitle.innerHTML = articles[i][0].view;
+            conservativeContainer.appendChild(viewTitle)
+
+            //image
+            let conservativeImg = document.createElement('img');
+            conservativeImg.classList.add('oblik-img');
+            conservativeImg.src = articles[i][0].image;
+            conservativeContainer.appendChild(conservativeImg);
+
+            //title
+            let titleConservative = document.createElement('div');
+            titleConservative.classList.add('article-title');
+            titleConservative.innerHTML = articles[i][0].title;
+            conservativeContainer.appendChild(titleConservative);
+
+            //source
+            let sourceConservative = document.createElement('div');
+            sourceConservative.classList.add('article-source');
+            sourceConservative.innerHTML = articles[i][0].source;
+            conservativeContainer.appendChild(sourceConservative);
           }
-          conservative.appendChild(conservativeContainer);
-
-          //image
-          let conservativeImg = document.createElement('img');
-          conservativeImg.classList.add('oblik-img');
-          conservativeImg.src = articles[i][0].image;
-          conservativeContainer.appendChild(conservativeImg);
-
-          //title
-          let titleConservative = document.createElement('div');
-          titleConservative.classList.add('article-title');
-          titleConservative.innerHTML = articles[i][0].title;
-          conservativeContainer.appendChild(titleConservative);
-
-          //source
-          let sourceConservative = document.createElement('div');
-          sourceConservative.classList.add('article-source');
-          sourceConservative.innerHTML = articles[i][0].source;
-          conservativeContainer.appendChild(sourceConservative);
         }
+      } else {
+        console.log('hello');
+        let noArticles = document.createElement('div');
+        noArticles.classList.add('noArticles');
+        noArticles.innerHTML = 'Sorry, we could not find any articles.';
+        modalBody.appendChild(noArticles);
       }
       // click anywhere on the window to exit
       window.onclick = function(event) {
