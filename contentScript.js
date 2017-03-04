@@ -1,7 +1,7 @@
 //sends URL to server
 let url = {url: document.URL}
 let getArticles = new XMLHttpRequest();
-getArticles.open('POST', 'https://localhost:8080/related-articles', true);
+getArticles.open('POST', 'https://oblik.us/related-articles/', true);
 getArticles.addEventListener("load", getData);
 getArticles.setRequestHeader("content-type", "application/json; charset=UTF-8");
 getArticles.send(JSON.stringify(url));
